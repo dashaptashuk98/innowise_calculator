@@ -57,6 +57,11 @@ textarea {
   overflow-y: hidden;
   width: 100%;
   max-width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.calc__display::-webkit-scrollbar {
+  display: none;
 }
 .calc__buttons {
   display: grid;

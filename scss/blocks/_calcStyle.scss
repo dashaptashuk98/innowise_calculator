@@ -26,6 +26,11 @@
     overflow-y: hidden;
     width: 100%;
     max-width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &__buttons {
