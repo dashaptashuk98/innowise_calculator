@@ -11,7 +11,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f0f0f0;
+  background: #494848;
 }
 
 img {
@@ -102,4 +102,149 @@ textarea {
   grid-column: span 2;
   width: 100%;
   border-radius: 34px;
+}
+
+.theme-switch {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.theme-toggle__checkbox {
+  display: none;
+}
+
+.theme-toggle__container {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background: #333;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle__track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ffd700, #ff9501);
+  border-radius: 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.theme-toggle__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.theme-toggle__sun,
+.theme-toggle__moon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  transition: all 0.3s ease;
+  z-index: 1;
+  filter: brightness(0) invert(1);
+}
+
+.theme-toggle__sun {
+  left: 6px;
+  opacity: 1;
+}
+
+.theme-toggle__moon {
+  right: 6px;
+  opacity: 0.5;
+  filter: brightness(0) invert(1);
+}
+
+.theme-toggle__label {
+  color: white;
+  font-family: Arial;
+  font-size: 14px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.theme-toggle__checkbox:checked + .theme-toggle__container {
+  background: #f0f0f0;
+}
+
+.theme-toggle__checkbox:checked + .theme-toggle__container .theme-toggle__thumb {
+  transform: translateX(30px);
+  background: #333;
+}
+
+.theme-toggle__checkbox:checked + .theme-toggle__container .theme-toggle__track {
+  opacity: 1;
+}
+
+.theme-toggle__checkbox:checked + .theme-toggle__container .theme-toggle__sun {
+  opacity: 0.5;
+  filter: brightness(0) invert(0);
+}
+
+.theme-toggle__checkbox:checked + .theme-toggle__container .theme-toggle__moon {
+  opacity: 1;
+  filter: brightness(0) invert(0);
+}
+
+body[data-theme=light] {
+  background-color: #dac9c9;
+}
+
+body[data-theme=light] .calc {
+  background: #f0f0f0;
+  color: #000;
+  box-shadow: 4px 4px 4px #ccc;
+}
+
+body[data-theme=light] .calc__btn {
+  background: #d4d4d2;
+  color: #000;
+}
+
+body[data-theme=light] .calc__btn--grey {
+  background: #a6a6a6;
+  color: #000;
+}
+
+body[data-theme=light] .calc__btn--orange {
+  background: #ff9501;
+  color: white;
+}
+
+body[data-theme=light] .theme-toggle__label {
+  color: #000;
+}
+
+.calc__screen {
+  position: relative;
+  height: 125px;
+  padding: 10px;
+  display: grid;
+  justify-items: end;
+  align-items: end;
+  margin-bottom: 25px;
 }/*# sourceMappingURL=style.css.map */

@@ -6,9 +6,28 @@
     <title>Innowise Calculator</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body data-theme="dark">
     <div class="calc">
       <div class="calc__screen">
+        <div class="theme-switch">
+          <label class="theme-toggle">
+            <input type="checkbox" class="theme-toggle__checkbox" />
+            <div class="theme-toggle__container">
+              <img
+                src="images/icons8-солнце.svg"
+                alt="Светлая тема"
+                class="theme-toggle__sun"
+              />
+              <img
+                src="images/Луна by iconSvg.co (1).svg"
+                alt="Темная тема"
+                class="theme-toggle__moon"
+              />
+              <div class="theme-toggle__track"></div>
+              <div class="theme-toggle__thumb"></div>
+            </div>
+          </label>
+        </div>
         <p class="calc__display">0</p>
       </div>
       <div class="calc__buttons">
@@ -39,6 +58,7 @@
         <button class="calc__btn calc__btn--equal calc__btn--orange">=</button>
       </div>
     </div>
+
     <script src="js/calc.js"></script>
   </body>
 </html>
