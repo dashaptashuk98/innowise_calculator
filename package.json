@@ -12,8 +12,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "eslint"
+      "eslint --fix --max-warnings=0",
+      "eslint --max-warnings=0"
     ]
   },
   "devDependencies": {
