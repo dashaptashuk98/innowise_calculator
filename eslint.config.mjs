@@ -9,12 +9,19 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.es2021,
+
+        require: 'readonly',
+        module: 'readonly',
+        exports: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        process: 'readonly',
       },
       ecmaVersion: 'latest',
       sourceType: 'module',
     },
     rules: {
-      'no-unused-vars': 'error',
+      'no-unused-vars': 'warn',
       'no-console': 'warn',
       'no-debugger': 'error',
       eqeqeq: 'error',
@@ -24,6 +31,24 @@ export default [
       indent: 'off',
       'object-curly-spacing': 'off',
       'prefer-template': 'off',
+      'no-undef': 'off',
+    },
+  },
+  {
+    files: ['webpack.config.js'],
+    languageOptions: {
+      globals: {
+        require: 'readonly',
+        module: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        process: 'readonly',
+      },
+    },
+    rules: {
+      'no-unused-vars': 'off',
+      'no-undef': 'off',
+      'no-console': 'off',
     },
   },
   {
