@@ -34,23 +34,23 @@ export default [
       'no-undef': 'off',
     },
   },
-  {
-    files: ['webpack.config.js'],
-    languageOptions: {
-      globals: {
-        require: 'readonly',
-        module: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-        process: 'readonly',
-      },
-    },
-    rules: {
-      'no-unused-vars': 'off',
-      'no-undef': 'off',
-      'no-console': 'off',
-    },
-  },
+  // {
+  //   files: ['webpack.config.js'],
+  //   languageOptions: {
+  //     globals: {
+  //       require: 'readonly',
+  //       module: 'readonly',
+  //       __dirname: 'readonly',
+  //       __filename: 'readonly',
+  //       process: 'readonly',
+  //     },
+  //   },
+  //   rules: {
+  //     'no-unused-vars': 'off',
+  //     'no-undef': 'off',
+  //     'no-console': 'off',
+  //   },
+  // },
   {
     ignores: ['node_modules/', 'dist/', 'build/', 'css/'],
   },

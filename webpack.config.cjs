@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'production',
-  entry: './src/js/main.js',
+  entry: './src/ts/main.ts',
 
   output: {
     filename: 'main.js',
@@ -11,8 +11,21 @@ module.exports = {
     clean: true,
   },
 
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
+
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.scss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],

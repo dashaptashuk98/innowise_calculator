@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .theme-switch {
   position: absolute;
   top: 10px;
@@ -45,7 +47,7 @@
     width: $switch-width;
     height: $switch-height;
     background: $dark-bg;
-    border-radius: $switch-height / 2;
+    border-radius: math.div($switch-height, 2); // исправлено
     transition: $transition;
   }
 
@@ -58,13 +60,13 @@
     background: $gradient;
     border-radius: inherit;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: $transition;
   }
 
   &__thumb {
     position: absolute;
-    top: ($switch-height - $thumb-size) / 2;
-    left: ($switch-height - $thumb-size) / 2;
+    top: math.div($switch-height - $thumb-size, 2); // исправлено
+    left: math.div($switch-height - $thumb-size, 2); // исправлено
     width: $thumb-size;
     height: $thumb-size;
     background: $light-thumb;
@@ -86,12 +88,12 @@
   }
 
   &__sun {
-    left: ($switch-height - $icon-size) / 2;
+    left: math.div($switch-height - $icon-size, 2); // исправлено
     opacity: 1;
   }
 
   &__moon {
-    right: ($switch-height - $icon-size) / 2;
+    right: math.div($switch-height - $icon-size, 2); // исправлено
     opacity: 0.5;
   }
 
@@ -100,9 +102,16 @@
     font-family: Arial;
     font-size: 14px;
     user-select: none;
+    transition: $transition;
   }
 }
 
+// Добавляем transition для body
+body {
+  transition: $transition;
+}
+
+// Стили для светлой темы
 body[data-theme='light'] {
   background-color: #dac9c9;
 
@@ -110,11 +119,13 @@ body[data-theme='light'] {
     background: #f0f0f0;
     color: #000;
     box-shadow: 4px 4px 4px #ccc;
+    transition: $transition;
   }
 
   .calc__btn {
     background: #d4d4d2;
     color: #000;
+    transition: $transition;
 
     &--grey {
       background: #a6a6a6;
@@ -129,5 +140,36 @@ body[data-theme='light'] {
 
   .theme-toggle__label {
     color: #000;
+  }
+}
+
+// Стили для темной темы
+body[data-theme='dark'] {
+  background-color: #494848;
+
+  .calc {
+    background: $bg-color;
+    color: $white;
+    box-shadow: 4px 4px 4px #7f7e7e;
+    transition: $transition;
+  }
+
+  .calc__btn {
+    background: #333;
+    color: $white;
+    transition: $transition;
+
+    &--grey {
+      background: $grey;
+      color: $bg-color;
+    }
+
+    &--orange {
+      background: $orange;
+    }
+  }
+
+  .theme-toggle__label {
+    color: white;
   }
 }

@@ -1,6 +1,6 @@
-import { state, out } from './state.js'
+import { state, out } from '../ts/state'
 
-export function clearAll() {
+export function clearAll(): void {
   state.numFirst = ''
   state.numSecond = ''
   state.sign = ''
@@ -8,11 +8,11 @@ export function clearAll() {
   out.textContent = '0'
 }
 
-export function scrollToLeft() {
+export function scrollToLeft(): void {
   out.scrollLeft = out.scrollWidth
 }
 
-export function formatNumber(num) {
+export function formatNumber(num: string): string {
   if (!num) return num
   const parts = num.toString().split('.')
   const firstPart = parts[0]
@@ -21,7 +21,7 @@ export function formatNumber(num) {
   return formattedNum + secondPart
 }
 
-export function toggleSign() {
+export function toggleSign(): void {
   if (state.numSecond === '' && state.sign === '') {
     state.numFirst = state.numFirst
       ? (-parseFloat(state.numFirst)).toString()
@@ -31,7 +31,7 @@ export function toggleSign() {
   }
 }
 
-export function findPercentage() {
+export function findPercentage(): void {
   if (state.numSecond === '' && state.sign === '') {
     state.numFirst = (parseFloat(state.numFirst) / 100).toString()
   } else if (state.numSecond !== '') {
@@ -39,7 +39,7 @@ export function findPercentage() {
   }
 }
 
-export function handlePoint() {
+export function handlePoint(): void {
   if (state.numSecond === '' && state.sign === '') {
     if (state.numFirst === '' || state.numFirst === '0') {
       state.numFirst = '0.'
@@ -62,11 +62,11 @@ export function handlePoint() {
   scrollToLeft()
 }
 
-export function displayFullExpression() {
+export function displayFullExpression(): void {
   if (state.numSecond === '' && state.sign === '') {
     out.textContent = formatNumber(state.numFirst) || '0'
   } else {
-    let secondNumDisplay
+    let secondNumDisplay: string
     if (state.numSecond.endsWith('.')) {
       const numWithoutPoint = state.numSecond.slice(0, -1)
       secondNumDisplay = formatNumber(numWithoutPoint) + '.'
