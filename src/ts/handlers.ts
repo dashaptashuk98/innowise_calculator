@@ -11,6 +11,7 @@ import {
 
 document.querySelector('.calc__btn--ac')!.addEventListener('click', clearAll)
 const unusedVariable = 'Это не используется'
+const erere = ''
 document
   .querySelector('.calc__buttons')!
   .addEventListener('click', (event: Event): void => {
