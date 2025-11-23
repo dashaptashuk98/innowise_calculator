@@ -1,57 +1,36 @@
 import js from '@eslint/js'
-import globals from 'globals'
+import typescriptParser from '@typescript-eslint/parser'
 
 export default [
-  js.configs.recommended,
   {
-    files: ['**/*.{js,mjs,cjs}'],
+    // Для JavaScript файлов
+    files: ['**/*.js'],
+    ...js.configs.recommended,
     languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.es2021,
-
-        require: 'readonly',
-        module: 'readonly',
-        exports: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-        process: 'readonly',
-      },
       ecmaVersion: 'latest',
       sourceType: 'module',
     },
     rules: {
       'no-unused-vars': 'warn',
       'no-console': 'warn',
-      'no-debugger': 'error',
-      eqeqeq: 'error',
-      'prefer-const': 'error',
-      'no-var': 'error',
-      'prefer-arrow-callback': 'error',
-      indent: 'off',
-      'object-curly-spacing': 'off',
-      'prefer-template': 'off',
-      'no-undef': 'off',
     },
   },
-  // {
-  //   files: ['webpack.config.js'],
-  //   languageOptions: {
-  //     globals: {
-  //       require: 'readonly',
-  //       module: 'readonly',
-  //       __dirname: 'readonly',
-  //       __filename: 'readonly',
-  //       process: 'readonly',
-  //     },
-  //   },
-  //   rules: {
-  //     'no-unused-vars': 'off',
-  //     'no-undef': 'off',
-  //     'no-console': 'off',
-  //   },
-  // },
   {
-    ignores: ['node_modules/', 'dist/', 'build/', 'css/'],
+    // Для TypeScript файлов
+    files: ['**/*.ts'],
+    ...js.configs.recommended,
+    languageOptions: {
+      parser: typescriptParser, // Добавляем TypeScript парсер
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+    rules: {
+      'no-unused-vars': 'error',
+      'no-console': 'warn',
+      'no-undef': 'off', // Отключаем для TS, т.к. проверяет типы
+    },
+  },
+  {
+    ignores: ['dist/**', 'node_modules/**'],
   },
 ]
