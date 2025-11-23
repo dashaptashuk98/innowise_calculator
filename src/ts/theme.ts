@@ -6,8 +6,9 @@ const savedTheme: string = localStorage.getItem('theme') || 'dark'
 bodyEl.setAttribute('data-theme', savedTheme)
 themeToggle.checked = savedTheme === 'light'
 
-themeToggle.addEventListener('change', function (this: HTMLInputElement): void {
-  if (this.checked) {
+themeToggle.addEventListener('change', (event: Event): void => {
+  const target = event.target as HTMLInputElement
+  if (target.checked) {
     bodyEl.setAttribute('data-theme', 'light')
     localStorage.setItem('theme', 'light')
   } else {
