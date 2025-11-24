@@ -10,7 +10,6 @@ import {
 } from './utils'
 
 document.querySelector('.calc__btn--ac')!.addEventListener('click', clearAll)
-const jde = ''
 document
   .querySelector('.calc__buttons')!
   .addEventListener('click', (event: Event): void => {
