@@ -4,7 +4,7 @@
   "description": "A modern calculator application",
   "type": "module",
   "scripts": {
-    "prepare": "husky",
+    "prepare": "if [ \"$SKIP_PREPARE\" != \"true\" ]; then husky; fi",
     "lint": "eslint src/ts/",
     "lint:fix": "eslint src/ts/ --fix",
     "format": "prettier --write . --ignore-path .gitignore",
