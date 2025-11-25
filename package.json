@@ -1,0 +1,44 @@
+{
+  "name": "calculator-app",
+  "version": "1.0.0",
+  "description": "A modern calculator application",
+  "type": "module",
+  "scripts": {
+    "prepare": "husky",
+    "lint": "eslint src/ts/",
+    "lint:fix": "eslint src/ts/ --fix",
+    "format": "prettier --write . --ignore-path .gitignore",
+    "format:check": "prettier --check . --ignore-path .gitignore",
+    "dev": "webpack serve --mode development",
+    "clean": "Remove-Item -Recurse -Force dist, node_modules\\.cache",
+    "build": "webpack --mode production"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix --max-warnings=0",
+      "eslint --max-warnings=0"
+    ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.5.0",
+    "html-webpack-plugin": "^5.6.5",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "mini-css-extract-plugin": "^2.9.4",
+    "prettier": "^3.6.2",
+    "sass": "^1.58.0",
+    "sass-loader": "^10.4.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  }
+}
