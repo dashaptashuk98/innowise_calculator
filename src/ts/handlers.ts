@@ -6,7 +6,7 @@ import {
   toggleSign,
   findPercentage,
   handlePoint,
-  formatNumber,
+  calculateExpression,
 } from './utils'
 
 document.querySelector('.calc__btn--ac')!.addEventListener('click', clearAll)
@@ -20,41 +20,44 @@ document
     const key: string = target.textContent!.trim()
 
     if (nums.includes(key)) {
-      if (key === '.') {
+      if (state.finish) {
+        if (key === '.') {
+          state.currentInput = '0.'
+        } else {
+          state.currentInput = key
+        }
+        state.expression = []
+        state.finish = false
+      } else if (key === '.') {
         handlePoint()
       } else {
-        if (state.numSecond === '' && state.sign === '') {
-          if (state.numFirst.length >= 15) return
-          state.numFirst = state.numFirst === '0' ? key : state.numFirst + key
-        } else if (
-          state.numFirst !== '' &&
-          state.numSecond !== '' &&
-          state.finish
-        ) {
-          if (key.length >= 15) return
-          state.numSecond = key
-          state.finish = false
+        if (state.currentInput === '' && state.expression.length > 0) {
+          state.currentInput = key
+        } else if (state.currentInput === '0') {
+          state.currentInput = key
         } else {
-          if (state.numSecond.length >= 15) return
-          state.numSecond =
-            state.numSecond === '0' ? key : state.numSecond + key
+          if (state.currentInput.length >= 15) return
+          state.currentInput += key
         }
-        displayFullExpression()
-        scrollToLeft()
       }
+      displayFullExpression()
+      scrollToLeft()
       return
     }
 
     if (actions.includes(key)) {
-      if (state.numFirst === '' && key !== '+/-') {
-        return
-      }
       if (key === '+/-') {
         toggleSign()
       } else if (key === '%') {
         findPercentage()
       } else {
-        state.sign = key
+        if (state.currentInput !== '') {
+          state.expression.push(state.currentInput)
+          state.expression.push(key)
+          state.currentInput = ''
+        } else if (state.expression.length > 0) {
+          state.expression[state.expression.length - 1] = key
+        }
         state.finish = false
       }
       displayFullExpression()
@@ -63,40 +66,23 @@ document
     }
 
     if (key === '=') {
-      if (state.numSecond === '') state.numSecond = state.numFirst
-      const operationSign: string = state.sign
-      switch (operationSign) {
-        case '+':
-          state.numFirst = (+state.numFirst + +state.numSecond).toString()
-          break
-        case '-':
-          state.numFirst = (
-            parseFloat(state.numFirst) - parseFloat(state.numSecond)
-          ).toString()
-          break
-        case 'Х':
-          state.numFirst = (
-            parseFloat(state.numFirst) * parseFloat(state.numSecond)
-          ).toString()
-          break
-        case '/':
-          if (parseFloat(state.numSecond) === 0) {
+      if (state.expression.length > 0 && state.currentInput !== '') {
+        state.expression.push(state.currentInput)
+        try {
+          const result = calculateExpression(state.expression)
+          state.currentInput = result.toString()
+          state.expression = []
+          state.finish = true
+          displayFullExpression()
+        } catch (error) {
+          if (error instanceof Error && error.message === 'DIVISION_BY_ZERO') {
             out.textContent = 'Ошибка'
-            state.numFirst = ''
-            state.numSecond = ''
-            state.sign = ''
-            return
+            state.currentInput = '0'
+            state.expression = []
+            state.finish = true
           }
-          state.numFirst = (
-            parseFloat(state.numFirst) / parseFloat(state.numSecond)
-          ).toString()
-          break
+        }
+        scrollToLeft()
       }
-
-      state.finish = true
-      out.textContent = formatNumber(state.numFirst)
-      scrollToLeft()
-      state.numSecond = ''
-      state.sign = ''
     }
   })

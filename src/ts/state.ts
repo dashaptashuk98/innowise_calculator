@@ -1,14 +1,12 @@
 export interface CalculatorState {
-  numFirst: string
-  numSecond: string
-  sign: string
+  currentInput: string
+  expression: string[]
   finish: boolean
 }
 
 export const state: CalculatorState = {
-  numFirst: '',
-  numSecond: '',
-  sign: '',
+  currentInput: '0',
+  expression: [],
   finish: false,
 }
 

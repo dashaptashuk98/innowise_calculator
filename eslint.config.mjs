@@ -3,7 +3,6 @@ import typescriptParser from '@typescript-eslint/parser'
 
 export default [
   {
-    // Для JavaScript файлов
     files: ['**/*.js'],
     ...js.configs.recommended,
     languageOptions: {
@@ -16,18 +15,17 @@ export default [
     },
   },
   {
-    // Для TypeScript файлов
     files: ['**/*.ts'],
     ...js.configs.recommended,
     languageOptions: {
-      parser: typescriptParser, // Добавляем TypeScript парсер
+      parser: typescriptParser,
       ecmaVersion: 'latest',
       sourceType: 'module',
     },
     rules: {
       'no-unused-vars': 'error',
       'no-console': 'warn',
-      'no-undef': 'off', // Отключаем для TS, т.к. проверяет типы
+      'no-undef': 'off',
     },
   },
   {
